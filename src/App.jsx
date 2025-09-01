@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from 'react'
-
 import './App.css'
 
 function App() {
@@ -29,48 +28,69 @@ function App() {
     setPassword(pass);
   }, [length, includeNumbers, incspecialChars, setPassword]);
 
-  useEffect(()=>{
-   generatePassword();
-
+  useEffect(() => {
+    generatePassword();
   }, [generatePassword])
 
   return (
-    <div className="bg-slate-800 h-screen text-white">
+    <div className="bg-slate-900 min-h-screen flex items-center justify-center text-white">
+      <div className="bg-slate-800 p-8 rounded-2xl shadow-lg w-full max-w-md">
+        <h1 className="text-2xl font-bold text-center mb-6">
+          🔐 Password Generator
+        </h1>
 
-      <div className='flex  align-center justify-center '>
-        <div className='text-xl font-bold text-center m-6'>
-          Password Generator
-          <input className='rounded-xl bg-white border-2 text-black flex items-center'
+        {/* Password Display */}
+        <div className="flex items-center gap-2 mb-6">
+          <input
+            className="flex-1 rounded-lg px-3 py-2 border border-slate-600 bg-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
             type="text"
             value={password}
             readOnly
           />
+          <button
+            onClick={generatePassword}
+            className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium"
+          >
+            Generate
+          </button>
         </div>
-      </div>
-      <div className='flex items-center  justify-center text-sm flex gap-x-1  items-left'>
 
-        <label >range: {length} </label>
-        <input className='' type="range"
-          min="8"
-          max="20"
-          value={length}
-          onChange={(e) => { setLength(e.target.value) }}
-        />
+        {/* Options */}
+        <div className="space-y-4">
+          <div>
+            <label className="block text-sm font-medium mb-1">
+              Length: {length}
+            </label>
+            <input
+              className="w-full"
+              type="range"
+              min="8"
+              max="20"
+              value={length}
+              onChange={(e) => setLength(e.target.value)}
+            />
+          </div>
 
-        <input type="checkbox"
-          onChange={(e) => { setIncludeNumbers(e.target.checked) }}
-          checked={includeNumbers}
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="numbers"
+              onChange={(e) => setIncludeNumbers(e.target.checked)}
+              checked={includeNumbers}
+            />
+            <label htmlFor="numbers" className="text-sm">Include numbers</label>
+          </div>
 
-        />
-        <label>Include numbers</label>
-        <input type="checkbox" 
-
-          onChange={(e) => { setIncludeSpecialChars(e.target.checked) }}
-          checked={incspecialChars}
-
-        
-        />
-        <label>Include special characters</label>
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              id="special"
+              onChange={(e) => setIncludeSpecialChars(e.target.checked)}
+              checked={incspecialChars}
+            />
+            <label htmlFor="special" className="text-sm">Include special characters</label>
+          </div>
+        </div>
       </div>
     </div>
   )
