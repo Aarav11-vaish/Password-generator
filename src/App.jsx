@@ -35,18 +35,19 @@ function App() {
   }, [generatePassword])
 
   return (
-    <>
-      <div className='flex  alighn-center justify-center '>
+    <div className="bg-slate-800 h-screen text-white">
+
+      <div className='flex  align-center justify-center '>
         <div className='text-xl font-bold text-center m-6'>
           Password Generator
-          <input className='rounded-xl bg-white border-2 flex items-center'
+          <input className='rounded-xl bg-white border-2 text-black flex items-center'
             type="text"
             value={password}
             readOnly
           />
         </div>
       </div>
-      <div className='flex items-center justify-center text-sm flex gap-x-1  items-left'>
+      <div className='flex items-center  justify-center text-sm flex gap-x-1  items-left'>
 
         <label >range: {length} </label>
         <input className='' type="range"
@@ -71,7 +72,7 @@ function App() {
         />
         <label>Include special characters</label>
       </div>
-    </>
+    </div>
   )
 }
 
