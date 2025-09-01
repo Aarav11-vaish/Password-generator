@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
+import toast , {Toaster}from 'react-hot-toast';
 import './App.css'
 
 function App() {
@@ -27,6 +28,10 @@ function App() {
     }
     setPassword(pass);
   }, [length, includeNumbers, incspecialChars, setPassword]);
+  const copytoclipboard = useCallback(()=>{
+    toast.success("Password copied to clipboard")
+    navigator.clipboard.writeText(password);
+  }, [password, setPassword, toast])
 
   useEffect(() => {
     generatePassword();
@@ -48,10 +53,10 @@ function App() {
             readOnly
           />
           <button
-            onClick={generatePassword}
+            onClick={copytoclipboard}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium"
           >
-            Generate
+            Copy
           </button>
         </div>
 
@@ -92,6 +97,7 @@ function App() {
           </div>
         </div>
       </div>
+        <Toaster position="top-center" reverseOrder={false} />
     </div>
   )
 }
